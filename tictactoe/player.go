@@ -1,7 +1,6 @@
 package tictactoe
 
 import (
-	"errors"
 	"fmt"
 )
 
@@ -30,11 +29,11 @@ func (p *Player) GetMove() (int, int, error) {
 
 	input, err := fmt.Scanf("%d %d\n", &i, &j)
 	if err != nil {
-		return 0, 0, errors.New("Input can only be numbers")
+		return 0, 0, ErrInvalidInputFormat
 	}
 
 	if input != 2 {
-		return 0, 0, errors.New("Wrong input format")
+		return 0, 0, ErrInvalidInputCount
 	}
 
 	return i, j, nil
