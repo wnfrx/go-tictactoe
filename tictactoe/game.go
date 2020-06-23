@@ -40,13 +40,13 @@ func (g *Game) Start() {
 		// Player's turn, wait for input
 		i, j, err := g.currentPlayer.GetMove()
 		if err != nil {
-			fmt.Printf("Invalid input format, please try again")
+			fmt.Println("Invalid input format, please try again")
 			log.Printf("Error message: %v\n", err)
 			continue
 		}
 
 		if i < 0 || j < 0 || i > 2 || j > 2 {
-			fmt.Println("Input number 0-2 only, please try again")
+			fmt.Println("Input can be number 0-2 only, please try again")
 			continue
 		}
 
