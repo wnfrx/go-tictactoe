@@ -6,20 +6,22 @@ import (
 )
 
 type Game struct {
-	p1            Player // player 1
-	p2            Player // player 2
-	currentPlayer Player // current player
-	board         *Board // game board
-	round         int    // current round
+	p1            Player      // player 1
+	p2            Player      // player 2
+	currentPlayer Player      // current player
+	board         *Board      // game board
+	round         int         // current round
+	logger        *log.Logger // game logger (events, errors)
 }
 
-func NewGame(p1, p2 Player) *Game {
+func NewGame(p1, p2 Player, l *log.Logger) *Game {
 	return &Game{
 		p1:            p1,
 		p2:            p2,
 		currentPlayer: p1,
 		board:         newBoard(),
 		round:         1,
+		logger:        l,
 	}
 }
 
@@ -41,7 +43,7 @@ func (g *Game) Start() {
 		i, j, err := g.currentPlayer.GetMove()
 		if err != nil {
 			fmt.Println("Invalid input format, please try again")
-			log.Printf("Error message: %v\n", err)
+			g.logger.Printf("Error message: %v\n", err)
 			continue
 		}
 
