@@ -4,7 +4,7 @@ import "fmt"
 
 type Board [3][3]string
 
-func newBoard() *Board {
+func NewBoard() *Board {
 	var b Board
 
 	for i := 0; i < len(b); i++ {

@@ -19,7 +19,7 @@ func NewGame(p1, p2 Player, l *log.Logger) *Game {
 		p1:            p1,
 		p2:            p2,
 		currentPlayer: p1,
-		board:         newBoard(),
+		board:         NewBoard(),
 		round:         1,
 		logger:        l,
 	}
