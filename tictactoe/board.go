@@ -41,32 +41,31 @@ func (b *Board) Draw() {
 }
 
 func (b *Board) HasWinner(mark1, mark2 string) bool {
+	mark1Streak := [3]string{mark1, mark1, mark1}
+	mark2Streak := [3]string{mark2, mark2, mark2}
+
 	// Check rows
-	if (b[0][0] == mark1 && b[0][1] == mark1 && b[0][2] == mark1) ||
-		(b[1][0] == mark1 && b[1][1] == mark1 && b[1][2] == mark1) ||
-		(b[2][0] == mark1 && b[2][1] == mark1 && b[2][2] == mark1) ||
-		(b[0][0] == mark2 && b[0][1] == mark2 && b[0][2] == mark2) ||
-		(b[1][0] == mark2 && b[1][1] == mark2 && b[1][2] == mark2) ||
-		(b[2][0] == mark2 && b[2][1] == mark2 && b[2][2] == mark2) {
-		return true
+	rows := b.rows()
+	for _, row := range rows {
+		if row == mark1Streak || row == mark2Streak {
+			return true
+		}
 	}
 
 	// Check columns
-	if (b[0][0] == mark1 && b[1][0] == mark1 && b[2][0] == mark1) ||
-		(b[0][1] == mark1 && b[1][1] == mark1 && b[2][1] == mark1) ||
-		(b[0][2] == mark1 && b[1][2] == mark1 && b[2][2] == mark1) ||
-		(b[0][0] == mark2 && b[1][0] == mark2 && b[2][0] == mark2) ||
-		(b[0][1] == mark2 && b[1][1] == mark2 && b[2][1] == mark2) ||
-		(b[0][2] == mark2 && b[1][2] == mark2 && b[2][2] == mark2) {
-		return true
+	columns := b.columns()
+	for _, col := range columns {
+		if col == mark1Streak || col == mark2Streak {
+			return true
+		}
 	}
 
 	// Check diagonals
-	if (b[0][0] == mark1 && b[1][1] == mark1 && b[2][2] == mark1) ||
-		(b[0][2] == mark1 && b[1][1] == mark1 && b[2][0] == mark1) ||
-		(b[0][0] == mark2 && b[1][1] == mark2 && b[2][2] == mark2) ||
-		(b[0][2] == mark2 && b[1][1] == mark2 && b[2][0] == mark2) {
-		return true
+	diagonals := b.diagonals()
+	for _, diagonal := range diagonals {
+		if diagonal == mark1Streak || diagonal == mark2Streak {
+			return true
+		}
 	}
 
 	return false
@@ -82,4 +81,29 @@ func (b *Board) HasEmptyCell() bool {
 	}
 
 	return false
+}
+
+func (b *Board) rows() [3][3]string {
+	return *b
+}
+
+func (b *Board) columns() [3][3]string {
+	var columns [3][3]string
+
+	for i := 0; i < len(b); i++ {
+		for j := 0; j < len(b[i]); j++ {
+			columns[j][i] = b[i][j]
+		}
+	}
+
+	return columns
+}
+
+func (b *Board) diagonals() [2][3]string {
+	var diagonals [2][3]string
+
+	diagonals[0] = [3]string{b[0][0], b[1][1], b[2][2]}
+	diagonals[1] = [3]string{b[2][0], b[1][1], b[0][2]}
+
+	return diagonals
 }
