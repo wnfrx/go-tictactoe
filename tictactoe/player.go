@@ -27,13 +27,9 @@ func (p *Player) GetMove() (int, int, error) {
 
 	fmt.Print("Enter row and column number [0-2]: ")
 
-	input, err := fmt.Scanf("%d %d\n", &i, &j)
+	_, err := fmt.Scanf("%d %d\n", &i, &j)
 	if err != nil {
 		return 0, 0, ErrInvalidInputFormat
-	}
-
-	if input != 2 {
-		return 0, 0, ErrInvalidInputCount
 	}
 
 	return i, j, nil
