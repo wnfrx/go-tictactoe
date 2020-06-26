@@ -68,6 +68,9 @@ func (g *Game) Start() {
 		g.board.Draw()
 	}
 
+	// Print game result info
+	g.winnerInfo()
+
 	fmt.Println("End Game")
 }
 
@@ -86,4 +89,16 @@ func (g *Game) isOver() bool {
 func (g *Game) info() {
 	fmt.Printf("Turn #%v\n", g.round)
 	fmt.Printf("Player: %v\n", g.currentPlayer.Name())
+}
+
+func (g *Game) winnerInfo() {
+	winner := g.board.GetWinner(g.p1.Mark(), g.p2.Mark())
+
+	if winner == g.p1.Mark() {
+		fmt.Printf("Game Result: %v WON!\n", g.p1.Name())
+	} else if winner == g.p2.Mark() {
+		fmt.Printf("Game Result: %v WON!\n", g.p2.Name())
+	} else {
+		fmt.Println("Game Result: TIE")
+	}
 }
