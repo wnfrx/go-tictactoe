@@ -80,7 +80,7 @@ func (g *Game) switchPlayer() {
 }
 
 func (g *Game) isOver() bool {
-	return g.board.HasWinner(g.p1.Mark(), g.p2.Mark()) || !g.board.HasEmptyCell()
+	return g.board.GetWinner(g.p1.Mark(), g.p2.Mark()) != "" || !g.board.HasEmptyCell()
 }
 
 func (g *Game) info() {

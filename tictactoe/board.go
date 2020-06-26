@@ -40,35 +40,47 @@ func (b *Board) Draw() {
 	fmt.Println(str)
 }
 
-func (b *Board) HasWinner(mark1, mark2 string) bool {
+func (b *Board) GetWinner(mark1, mark2 string) string {
 	mark1Streak := [3]string{mark1, mark1, mark1}
 	mark2Streak := [3]string{mark2, mark2, mark2}
 
 	// Check rows
 	rows := b.rows()
 	for _, row := range rows {
-		if row == mark1Streak || row == mark2Streak {
-			return true
+		if row == mark1Streak {
+			return mark1
+		}
+
+		if row == mark2Streak {
+			return mark2
 		}
 	}
 
 	// Check columns
 	columns := b.columns()
 	for _, col := range columns {
-		if col == mark1Streak || col == mark2Streak {
-			return true
+		if col == mark1Streak {
+			return mark1
+		}
+
+		if col == mark2Streak {
+			return mark2
 		}
 	}
 
 	// Check diagonals
 	diagonals := b.diagonals()
 	for _, diagonal := range diagonals {
-		if diagonal == mark1Streak || diagonal == mark2Streak {
-			return true
+		if diagonal == mark1Streak {
+			return mark1
+		}
+
+		if diagonal == mark2Streak {
+			return mark2
 		}
 	}
 
-	return false
+	return ""
 }
 
 func (b *Board) HasEmptyCell() bool {
