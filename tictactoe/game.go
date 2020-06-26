@@ -40,7 +40,7 @@ func (g *Game) Start() {
 		g.info()
 
 		// Player's turn, wait for input
-		i, j, err := g.currentPlayer.GetMove()
+		i, j, err := g.currentPlayer.GetMove(nil)
 		if err != nil {
 			fmt.Println("Invalid input format, please try again")
 			g.logger.Printf("Error message: %v\n", err)

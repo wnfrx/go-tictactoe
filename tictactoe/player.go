@@ -2,6 +2,7 @@ package tictactoe
 
 import (
 	"fmt"
+	"os"
 )
 
 type Player struct {
@@ -22,12 +23,16 @@ type IPlayer interface {
 	Mark() string
 }
 
-func (p *Player) GetMove() (int, int, error) {
+func (p *Player) GetMove(in *os.File) (int, int, error) {
+	if in == nil {
+		in = os.Stdin
+	}
+
 	var i, j int
 
 	fmt.Print("Enter row and column number [0-2]: ")
 
-	_, err := fmt.Scanf("%d %d\n", &i, &j)
+	_, err := fmt.Fscanf(in, "%d %d\n", &i, &j)
 	if err != nil {
 		return 0, 0, ErrInvalidInputFormat
 	}
