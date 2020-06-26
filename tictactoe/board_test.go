@@ -12,23 +12,7 @@ var (
 )
 
 func TestEmptyBoard(t *testing.T) {
-	var board Board
-
-	/**
-	Board State:
-		_ _ _
-		_ _ _
-		_ _ _
-	*/
-	board[0][0] = "_"
-	board[0][1] = "_"
-	board[0][2] = "_"
-	board[1][0] = "_"
-	board[1][1] = "_"
-	board[1][2] = "_"
-	board[2][0] = "_"
-	board[2][1] = "_"
-	board[2][2] = "X"
+	var board = NewBoard()
 
 	hasEmptyCell := board.HasEmptyCell()
 
@@ -36,7 +20,7 @@ func TestEmptyBoard(t *testing.T) {
 }
 
 func TestFullBoard(t *testing.T) {
-	var board Board
+	var board = NewBoard()
 
 	/**
 	Board State:
@@ -60,7 +44,7 @@ func TestFullBoard(t *testing.T) {
 }
 
 func TestHasAWinner(t *testing.T) {
-	var board Board
+	var board = NewBoard()
 
 	/**
 	Board State:
@@ -71,12 +55,9 @@ func TestHasAWinner(t *testing.T) {
 	board[0][0] = MARK1
 	board[0][1] = MARK2
 	board[0][2] = MARK1
-	board[1][0] = "_"
 	board[1][1] = MARK2
 	board[1][2] = MARK1
-	board[2][0] = "_"
 	board[2][1] = MARK2
-	board[2][2] = "_"
 
 	winner := board.GetWinner(MARK1, MARK2)
 
@@ -84,7 +65,7 @@ func TestHasAWinner(t *testing.T) {
 }
 
 func TestHasNoWinner(t *testing.T) {
-	var board Board
+	var board = NewBoard()
 
 	/**
 	Board State:
